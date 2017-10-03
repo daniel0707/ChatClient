@@ -15,10 +15,12 @@ public class Sender implements Runnable {
 
     private ArrayBlockingQueue<String> messageQueue;
     private PrintStream output;
+    private ChatScreen chatScreen;
 
-    public Sender(PrintStream outputStream) {
+    public Sender(PrintStream outputStream, ChatScreen cs) {
         this.output = outputStream;
         this.messageQueue = new ArrayBlockingQueue<>(10);
+        chatScreen = cs;
     }
 
     @Override
