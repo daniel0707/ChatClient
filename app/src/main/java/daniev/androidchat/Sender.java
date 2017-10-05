@@ -25,7 +25,7 @@ public class Sender implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
+        while(!Thread.interrupted()) {
             try {
                 String newestMessage = this.messageQueue.take();
                 sendMSG(newestMessage);

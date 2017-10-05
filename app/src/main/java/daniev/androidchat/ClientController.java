@@ -16,6 +16,8 @@ public class ClientController implements Runnable{
     private Integer port;
     private Sender sender;
     private Updater updater;
+    private Thread senderThread;
+    private Thread updaterThread;
     private boolean haveWeTried = false;
 
     ClientController(ChatScreen chatScreen, String username, String ip, String portSTR){
@@ -40,8 +42,8 @@ public class ClientController implements Runnable{
                 io.printStackTrace();
             }
 
-            Thread senderThread = new Thread(sender);
-            Thread updaterThread = new Thread(updater);
+            senderThread = new Thread(sender);
+            updaterThread = new Thread(updater);
 
             senderThread.start();
             updaterThread.start();
@@ -55,4 +57,9 @@ public class ClientController implements Runnable{
     public static String getUser(){return user;}
     public static void setUser(String str){user = str; }
     public Sender getSender(){return sender;}
+
+    public void disconnect(){
+        senderThread.interrupt();
+        updaterThread.interrupt();
+    }
 }

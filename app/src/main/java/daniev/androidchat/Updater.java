@@ -18,7 +18,7 @@ public class Updater implements Runnable{
 
     @Override
     public void run() {
-        while(true){
+        while(!Thread.interrupted()){
             if(reader.hasNext()){
                 String raw = reader.nextLine();
                 if(raw!=null&& !raw.isEmpty()) {

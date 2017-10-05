@@ -49,7 +49,12 @@ public class ChatScreen extends AppCompatActivity {
                             controller.getSender().addMessage(":messages");
                         } else if (item.getItemId() == R.id.menu_channels) {
                             controller.getSender().addMessage(":channellist");
-                        } else if(item.getItemId() == R.id.menu_quit){};
+                        } else if(item.getItemId() == R.id.menu_quit){
+                            controller.getSender().addMessage(":quit");
+                            controller.disconnect();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                            System.exit(1);
+                        }
                             return true;
                     }
                 });
