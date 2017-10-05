@@ -20,13 +20,12 @@ public class Sender implements Runnable {
     public Sender(PrintStream outputStream, ChatScreen cs) {
         this.output = outputStream;
         this.messageQueue = new ArrayBlockingQueue<>(10);
-        chatScreen = cs;
+        this.chatScreen = cs;
     }
 
     @Override
     public void run() {
         while(true) {
-
             try {
                 String newestMessage = this.messageQueue.take();
                 sendMSG(newestMessage);

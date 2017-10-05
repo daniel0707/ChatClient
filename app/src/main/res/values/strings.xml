@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">AndroidChat</string>
+    <string name="username">Username</string>
+    <string name="ip_address">IP address</string>
+    <string name="port_number">Port number</string>
+    <string name="log_in">Log in</string>
+    <string name="send">SEND</string>
+    <string name="enter_message">Enter message</string>
+    <string name="vertical_ellipsis">&#8942;</string>
+    <string name="userlist">userlist</string>
+    <string name="history">history</string>
+    <string name="channels">channels</string>
+    <string name="quit">quit</string>
 </resources>

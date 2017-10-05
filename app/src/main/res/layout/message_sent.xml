@@ -8,6 +8,7 @@
     android:paddingTop="8dp">
 
     <TextView
+        android:elevation="4dp"
         android:id="@+id/text_message_body"
         android:text="hello, hello!"
         android:background="@drawable/bubble_silver"

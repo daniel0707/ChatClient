@@ -19,16 +19,43 @@ public class Updater implements Runnable{
     @Override
     public void run() {
         while(true){
-            String raw = reader.nextLine();
-            if(raw!=null&& !raw.isEmpty()) {
-                String[] split = raw.split("\\s", 3);
-                for (String str: split
-                     ) {
-                    System.out.println(str);
+            if(reader.hasNext()){
+                String raw = reader.nextLine();
+                if(raw!=null&& !raw.isEmpty()) {
+                    System.out.print(raw);
+                    String[] split = raw.split("\\s", 3);
+                    System.out.print(split[1]);
+                    filterMsg(split);
+                    Message msg = new Message(split[0], split[1], split[2]);
+                    addMsg(msg);
                 }
-                Message msg = new Message(split[0], split[1], split[2]);
-                chatScreen.addMessage(msg);
+            }else{System.out.println("system DID nOT HAVE NEXT");}
+        }
+    }
+
+    public void filterMsg(String[] strings){
+        if (strings[1].equals("System")){
+            if(strings[2].startsWith("Switched to ")) {
+                final String[] tempHolder = strings[2].split("\\s");
+                chatScreen.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        chatScreen.setChannelName(tempHolder[2]);
+                    }
+                });
+            }
+            if(strings[2].startsWith("User ")){
+                String[] temp = strings[2].split("\\s");
+                ClientController.setUser(temp[1]);
             }
         }
+    }
+    public void addMsg(final Message msg){
+        chatScreen.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                chatScreen.addMessage(msg);
+            }
+        });
     }
 }

@@ -9,7 +9,7 @@ public class Message {
     private String msg;
     private String author;
 
-    Message(String time, String msg, String user){
+    Message(String time,String user, String msg){
         this.time=time;
         this.msg=msg;
         this.author=user;

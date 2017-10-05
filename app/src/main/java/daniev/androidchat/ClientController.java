@@ -12,14 +12,17 @@ public class ClientController implements Runnable{
     private static String user;
     private Socket clientSocket;
     private ChatScreen cs;
-    private String IPaddress = "192.168.0.101";
-    private Integer port = 54860;
+    private String IPaddress;
+    private Integer port;
     private Sender sender;
     private Updater updater;
     private boolean haveWeTried = false;
 
-    ClientController(ChatScreen chatScreen){
-        cs = chatScreen;
+    ClientController(ChatScreen chatScreen, String username, String ip, String portSTR){
+        this.user = username;
+        this.IPaddress=ip;
+        this.port=Integer.parseInt(portSTR);
+        this.cs = chatScreen;
     }
     @Override
     public void run() {
@@ -45,10 +48,11 @@ public class ClientController implements Runnable{
 
             haveWeTried = true;
 
-            sender.sendMSG(":user Daniel");
+            sender.sendMSG(":user "+user);
         }
     }
-    public static String getUser(){return user;}
 
+    public static String getUser(){return user;}
+    public static void setUser(String str){user = str; }
     public Sender getSender(){return sender;}
 }
