@@ -3,15 +3,14 @@ package daniev.androidchat;
 import java.io.InputStream;
 import java.util.Scanner;
 /**
- * Created by danie on 3.10.2017.
+ * Class responsible for receiving updates from input stream
  */
 
 public class Updater implements Runnable{
-
     private Scanner reader;
     private ChatScreen chatScreen;
 
-    public Updater(InputStream connection, ChatScreen cs) {
+    Updater(InputStream connection, ChatScreen cs) {
         this.reader = new Scanner(connection);
         this.chatScreen = cs;
     }
@@ -23,6 +22,7 @@ public class Updater implements Runnable{
                 String raw = reader.nextLine();
                 if(raw!=null&& !raw.isEmpty()) {
                     System.out.print(raw);
+                    //expected format: [0]time, [1]username, [2]msg
                     String[] split = raw.split("\\s", 3);
                     System.out.print(split[1]);
                     filterMsg(split);
@@ -32,8 +32,10 @@ public class Updater implements Runnable{
             }else{System.out.println("system DID nOT HAVE NEXT");}
         }
     }
-
-    public void filterMsg(String[] strings){
+    /**
+     * Filter msg for system calls
+     */
+    private void filterMsg(String[] strings){
         if (strings[1].equals("System")){
             if(strings[2].startsWith("Username")){
                 chatScreen.callLoginActivity("Username taken");
@@ -53,7 +55,7 @@ public class Updater implements Runnable{
             }
         }
     }
-    public void addMsg(final Message msg){
+    private void addMsg(final Message msg){
         chatScreen.runOnUiThread(new Runnable() {
             @Override
             public void run() {

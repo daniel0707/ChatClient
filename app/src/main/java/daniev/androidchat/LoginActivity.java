@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Activity class responsible for taking login credentials and relaying to main activity
+ */
 public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     EditText usernameText;
@@ -23,12 +26,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Bundle extras = getIntent().getExtras();
         loginButton = findViewById(R.id.buttonLogIn);
         usernameText = findViewById(R.id.usernameText);
         IPAddressText = findViewById(R.id.IPText);
         portText = findViewById(R.id.portNumberText);
+        Bundle extras = getIntent().getExtras();
 
+        //if there are extras, an error occurred on last login attempt
         if(extras != null){
             errorPopup = extras.getString("Reason");
             Context context = getApplicationContext();

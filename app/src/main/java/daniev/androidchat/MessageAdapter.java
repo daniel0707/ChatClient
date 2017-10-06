@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
 
+/**
+ * Class responsible for providing content to the recycle viewer
+ */
 public class MessageAdapter extends RecyclerView.Adapter {
 
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
@@ -17,7 +19,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private Context myContext;
     private List<Message> myMessageList;
 
-    public MessageAdapter(Context context, List<Message> messageList){
+    MessageAdapter(Context context, List<Message> messageList){
         myContext = context;
         myMessageList = messageList;
     }

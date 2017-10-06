@@ -1,10 +1,9 @@
 package daniev.androidchat;
 
 /**
- * Created by danie on 3.10.2017.
+ * Template for message objects
  */
-
-public class Message {
+class Message {
     private String time;
     private String msg;
     private String author;
@@ -15,7 +14,7 @@ public class Message {
         this.author=user;
     }
 
-    public String getTime(){return time;}
-    public String getMsg(){return msg;}
-    public String getAuthor(){return author;}
+    String getTime(){return time;}
+    String getMsg(){return msg;}
+    String getAuthor(){return author;}
 }
