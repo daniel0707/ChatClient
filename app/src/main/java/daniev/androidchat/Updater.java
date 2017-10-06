@@ -35,6 +35,9 @@ public class Updater implements Runnable{
 
     public void filterMsg(String[] strings){
         if (strings[1].equals("System")){
+            if(strings[2].startsWith("Username")){
+                chatScreen.callLoginActivity("Username taken");
+            }
             if(strings[2].startsWith("Switched to ")) {
                 final String[] tempHolder = strings[2].split("\\s");
                 chatScreen.runOnUiThread(new Runnable() {

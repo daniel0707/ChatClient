@@ -1,5 +1,8 @@
 package daniev.androidchat;
 
+import android.content.Intent;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -32,16 +35,16 @@ public class ClientController implements Runnable{
             try {
                 clientSocket = new Socket(this.IPaddress, this.port);
             } catch (IOException io) {
-                io.printStackTrace();
+                cs.callLoginActivity("Wrong IP and/or port");
             }
-
-            try {
-                updater = new Updater(clientSocket.getInputStream(), cs);
-                sender = new Sender(new PrintStream(clientSocket.getOutputStream(), true),cs);
-            } catch (IOException io) {
-                io.printStackTrace();
+            if(clientSocket !=null) {
+                try {
+                    updater = new Updater(clientSocket.getInputStream(), cs);
+                    sender = new Sender(new PrintStream(clientSocket.getOutputStream(), true), cs);
+                } catch (IOException io) {
+                    cs.callLoginActivity("Network error, please try again later");
+                }
             }
-
             senderThread = new Thread(sender);
             updaterThread = new Thread(updater);
 

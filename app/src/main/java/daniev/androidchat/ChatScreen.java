@@ -69,8 +69,7 @@ public class ChatScreen extends AppCompatActivity {
 
 
         if(controller.getUser()==null){
-            Intent myIntent = new Intent(this, LoginActivity.class);
-            startActivityForResult(myIntent,LOGIN_ORDER);
+            callLoginActivity();
         }else{
             Thread controllerThread = new Thread(controller);
             controllerThread.start();
@@ -94,7 +93,16 @@ public class ChatScreen extends AppCompatActivity {
         channelName = str;
     }
 
+    public void callLoginActivity(){
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        startActivityForResult(myIntent,LOGIN_ORDER);
+    }
 
+    public void callLoginActivity(String reason){
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        myIntent.putExtra("Reason",reason);
+        startActivityForResult(myIntent,LOGIN_ORDER);
+    }
         @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == LOGIN_ORDER) {
