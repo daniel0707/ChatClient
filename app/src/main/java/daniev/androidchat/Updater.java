@@ -29,7 +29,7 @@ public class Updater implements Runnable{
                     Message msg = new Message(split[0], split[1], split[2]);
                     addMsg(msg);
                 }
-            }else{System.out.println("system DID nOT HAVE NEXT");}
+            }
         }
     }
     /**
