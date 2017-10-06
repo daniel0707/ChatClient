@@ -25,7 +25,7 @@ public class ChatScreen extends AppCompatActivity {
     private ArrayList<Message> messageList = new ArrayList<>();
     private ClientController controller;
     private EditText chatBox;
-    private String channelName ="";
+    private String channelName ="Default";
     private final int LOGIN_ORDER = 66;
 
     @Override
@@ -96,6 +96,9 @@ public class ChatScreen extends AppCompatActivity {
 
     public void setChannelName(String str){
         channelName = str;
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle("Channel: " + channelName);
+        }
     }
     //when first time logging in
     public void callLoginActivity(){
