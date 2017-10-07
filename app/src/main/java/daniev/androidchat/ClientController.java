@@ -28,19 +28,19 @@ public class ClientController implements Runnable{
     }
     @Override
     public void run() {
-        if(!haveWeTried) {
+        while(!haveWeTried) {
             try {
                 clientSocket = new Socket(this.IPaddress, this.port);
             } catch (IOException io) {
                 cs.callLoginActivity("Wrong IP and/or port");
+                break;
             }
-            if(clientSocket !=null) {
-                try {
-                    updater = new Updater(clientSocket.getInputStream(), cs);
-                    sender = new Sender(new PrintStream(clientSocket.getOutputStream(), true));
-                } catch (IOException io) {
-                    cs.callLoginActivity("Network error, please try again later");
-                }
+            try {
+                updater = new Updater(clientSocket.getInputStream(), cs);
+                sender = new Sender(new PrintStream(clientSocket.getOutputStream(), true));
+            } catch (IOException io) {
+                cs.callLoginActivity("Network error, please try again later");
+                break;
             }
             senderThread = new Thread(sender);
             updaterThread = new Thread(updater);
