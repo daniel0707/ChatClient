@@ -9,9 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.EditText;
 import java.util.ArrayList;
 
 /**
@@ -33,12 +32,31 @@ public class ChatScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
         chatBox = findViewById(R.id.edittext_chatbox);
-        Button sendButton = findViewById(R.id.button_chatbox_send);
+        ImageButton sendButton = findViewById(R.id.button_chatbox_send);
         myMessageRecycler = findViewById(R.id.recyclerview_message_list);
 
         //appbar replaced with toolbar
         final Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        myMessageRecycler.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v,
+                                       int left, int top, int right, int bottom,
+                                       int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom) {
+                    myMessageRecycler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            myMessageRecycler.smoothScrollToPosition(
+                                    myMessageRecycler.getAdapter().getItemCount() - 1);
+                        }
+                    }, 100);
+                }
+            }
+        });
+
+                //myMessageRecycler.scrollToPosition(messageList.size()-1);
 
         final ImageButton menuButton = findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {

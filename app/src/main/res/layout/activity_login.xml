@@ -24,6 +24,7 @@
         android:inputType="textPersonName"
         android:ellipsize="start"
         android:gravity="center|bottom"
+        android:singleLine="true"
         />
 
     <EditText
@@ -37,7 +38,8 @@
         android:inputType="number"
         android:digits="0123456789."
         android:ellipsize="start"
-        android:gravity="center|bottom"/>
+        android:gravity="center|bottom"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/portNumberText"
@@ -50,7 +52,10 @@
         android:inputType="number"
         android:digits="0123456789."
         android:ellipsize="start"
-        android:gravity="center|bottom"/>
+        android:gravity="center|bottom"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        />
 
     <Button
         android:id="@+id/buttonLogIn"
