@@ -1,6 +1,7 @@
 package daniev.androidchat;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,9 +75,7 @@ public class ChatScreen extends AppCompatActivity {
                             controller.getSender().addMessage(":channellist");
                         } else if(item.getItemId() == R.id.menu_quit){
                             controller.getSender().addMessage(":quit");
-                            controller.disconnect();
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                            System.exit(1);
+                            delayedExit();
                         }
                             return true;
                     }
@@ -148,6 +147,22 @@ public class ChatScreen extends AppCompatActivity {
                 messageList.add(msg);
                 myMessageAdapter.notifyDataSetChanged();
                 myMessageRecycler.scrollToPosition(messageList.size()-1);
+            }
+        });
+    }
+    private void delayedExit (){
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Handler tempHandler = new Handler();
+                tempHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        controller.disconnect();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                },200);
             }
         });
     }
